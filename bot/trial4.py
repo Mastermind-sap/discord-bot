@@ -3,6 +3,7 @@ import random
 from discord.ext import commands,tasks
 from itertools import cycle
 import pyjokes
+import joke_generator
 
 token = open("token.txt", "r").read()
 mainaccid=open("mainaccid.txt", "r").read()
@@ -86,9 +87,15 @@ async def choice(ctx,options="yes ,no"):
 async def ping(ctx):
     await ctx.send(f'Pong! {round(bot.latency *1000)}ms')
 
+@bot.command(aliases=["cjoke"])
+@commands.check(is_it_me)
+async def coding_joke(ctx):
+    await ctx.send(pyjokes.get_joke())
+
 @bot.command()
 @commands.check(is_it_me)
 async def joke(ctx):
-    await ctx.send(pyjokes.get_joke())
+    await ctx.send(joke_generator.generate())
+
 
 bot.run(token)

@@ -1,6 +1,5 @@
 import discord
 import random
-import requests
 from discord.ext import commands,tasks
 from itertools import cycle
 import pyjokes
@@ -12,12 +11,6 @@ mainaccid=open("mainaccid.txt", "r").read()
 bot = commands.Bot(command_prefix='!joker ')
 status=cycle(["Why So Sad!?","JOKER IS HERE","Use !joker"])
 
-def check_profanity(text):
-	obj = requests.get('http://www.wdylike.appspot.com/?q=' + str(text))
-	if 'true' in obj.text:
-		return True
-	elif 'false' in obj.text:
-		return False
 
 def is_it_me(ctx):
     return str(ctx.author.id) == mainaccid
@@ -44,19 +37,21 @@ async def on_command_error(ctx,error):
     elif isinstance(error,commands.CommandNotFound):
         await ctx.send("Invalid command!")
 
-@bot.event
-async def on_message(message):
-    if message.author == bot.user:
-        return
-
-    if check_profanity(message.content):
-        await message.channel.purge(limit=1)
-        await message.channel.send('NO BAD WORDS HERE!')
-    
 @bot.command()
 @commands.check(is_it_me)
 async def mention(ctx, user : discord.Member):
   await ctx.send(user.mention)
+
+@bot.command(aliases=["info","details"])
+async def whois(ctx, member : discord.Member = None):
+    if not member:
+        member = ctx.author
+    embed=discord.Embed(title=member.name,description=member.mention,color=discord.Colour.red())
+    embed.add_field(name="ID",value=member.id,inline=False)
+    embed.set_thumbnail(url=member.avatar_url)
+    await ctx.send(embed=embed)
+
+
 
 @bot.command(aliases=["getprofilepic","dp"])
 @commands.check(is_it_me)

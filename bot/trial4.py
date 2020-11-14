@@ -1,5 +1,6 @@
 import discord
 import random
+import requests
 from discord.ext import commands,tasks
 from itertools import cycle
 import pyjokes
@@ -10,6 +11,13 @@ mainaccid=open("mainaccid.txt", "r").read()
 
 bot = commands.Bot(command_prefix='!joker ')
 status=cycle(["Why So Sad!?","JOKER IS HERE","Use !joker"])
+
+def check_profanity(text):
+	obj = requests.get('http://www.wdylike.appspot.com/?q=' + str(text))
+	if 'true' in obj.text:
+		return True
+	elif 'false' in obj.text:
+		return False
 
 def is_it_me(ctx):
     return str(ctx.author.id) == mainaccid
@@ -35,6 +43,15 @@ async def on_command_error(ctx,error):
         await ctx.send("Please pass in all required arguments!")
     elif isinstance(error,commands.CommandNotFound):
         await ctx.send("Invalid command!")
+
+@bot.event
+async def on_message(message):
+    if message.author == bot.user:
+        return
+
+    if check_profanity(message.content):
+        await message.channel.purge(limit=1)
+        await message.channel.send('NO BAD WORDS HERE!')
     
 @bot.command()
 @commands.check(is_it_me)

@@ -48,6 +48,19 @@ async def getdp(ctx, member: discord.Member = None):
         member = ctx.author
     await ctx.send(member.avatar_url)
 
+##@bot.command(aliases=["memeify"])
+##@commands.check(is_it_me)
+##async def meme(ctx, member: discord.Member = None):
+##    if not member:
+##        member = ctx.author
+
+        
+@bot.command(aliases=["dm","pvtmessage"])
+async def pm(ctx , member: discord.Member = None,*,text):
+    if not member:
+        member = ctx.author
+    await member.send(text)
+
 @bot.command(aliases=["clean"])
 @commands.has_permissions(manage_messages=True)
 async def clear(ctx,amount=1):

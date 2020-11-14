@@ -41,6 +41,13 @@ async def on_command_error(ctx,error):
 async def mention(ctx, user : discord.Member):
   await ctx.send(user.mention)
 
+@bot.command(aliases=["getprofilepic","dp"])
+@commands.check(is_it_me)
+async def getdp(ctx, member: discord.Member = None):
+    if not member:
+        member = ctx.author
+    await ctx.send(member.avatar_url)
+
 @bot.command(aliases=["clean"])
 @commands.has_permissions(manage_messages=True)
 async def clear(ctx,amount=1):

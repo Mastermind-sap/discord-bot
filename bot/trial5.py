@@ -26,7 +26,8 @@ async def help(ctx):
     help_embed.add_field(name="hi/hello",value="say hi",inline=False)
     help_embed.add_field(name="uthere/areuthere",value="ask are you there",inline=False)
     help_embed.add_field(name="insult/troll",value="insult someone",inline=False)
-    help_embed.add_field(name="goodnight/goodn8/nightynight",value="wish goodnight",inline=False)
+    help_embed.add_field(name="goodmorning/gm",value="wish goodmorning",inline=False)
+    help_embed.add_field(name="goodnight/goodn8/nightynight/gn",value="wish goodnight",inline=False)
     help_embed.add_field(name="bye/sayonara/adios",value="say bye",inline=False)
     help_embed.add_field(name="spam",value="spam some text n number of times",inline=False)
     help_embed.add_field(name="choice/choose/select/random",value="choose random item from a list",inline=False)
@@ -53,7 +54,7 @@ async def change_status():
 async def on_member_join(member):
     for channel in member.server.channels:
         if str(channel)=="general":
-            await client.send_message(f"""WELCOME TO THE SERVER {member.mention}""")
+            await bot.send_message(f"""WELCOME TO THE SERVER {member.mention}""")
 
 @bot.event
 async def on_command_error(ctx,error):
@@ -143,6 +144,20 @@ async def insult(ctx, user : discord.Member =None):
     await ctx.send('Insulting'+user.mention)
     await ctx.send(random.choice(insult))
 
+gm=["https://media.tenor.com/images/027da4b11ab91e5c0dffb388a8c6f060/tenor.gif",
+    "https://media.tenor.com/images/84a8c2f0a681c3fc7db9b7084122d5a1/tenor.gif",
+    "https://media.tenor.com/images/c591a3e438a4249775bf00457b915793/tenor.gif",
+    "https://media.tenor.com/images/2890b109fc92eff030d1c24db0d2a761/tenor.gif",
+    "https://media.tenor.com/images/5852b06765c604372f640218b4e24b3d/tenor.gif",
+    "https://media.tenor.com/images/8e9f35f9648ab4256531dde31de09a9f/tenor.gif",
+    "https://media.tenor.com/images/8f4a3f2f406ecccc8f790d63e5c94e3e/tenor.gif"]
+@bot.command(aliases=["gm"])
+async def goodmorning(ctx, user : discord.Member =None):
+    if not user:
+        user=ctx.author
+    await ctx.send('Good Morning! '+user.mention)
+    await ctx.send(random.choice(gm))
+
 gn=["https://media.tenor.com/images/dec42b8d70a58a62cf106ecac1023d60/tenor.gif",
     "https://media.tenor.com/images/ccd68c7c41800fb7090eced436a1bda0/tenor.gif",
     "https://media.tenor.com/images/ef780440dce0fe33dedf9ca205f2ca1c/tenor.gif",
@@ -187,6 +202,10 @@ async def choice(ctx,options="yes ,no"):
 @bot.command()
 async def ping(ctx):
     await ctx.send(f'Pong! {round(bot.latency *1000)}ms')
+
+@bot.command()
+async def gif(ctx,*,text):
+    await ctx.send("/giphy "+text)
 
 @bot.command(aliases=["cjoke"])
 async def coding_joke(ctx):

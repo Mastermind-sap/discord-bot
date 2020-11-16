@@ -51,7 +51,7 @@ async def change_status():
 async def on_member_join(member):
     for channel in member.server.channels:
         if str(channel)=="general":
-            await client.send_message(f"""WELCOME TO THE SERVER {member.mention}""")
+            await bot.send_message(f"""WELCOME TO THE SERVER {member.mention}""")
 
 @bot.event
 async def on_command_error(ctx,error):

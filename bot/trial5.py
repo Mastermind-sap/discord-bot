@@ -203,9 +203,10 @@ async def choice(ctx,options="yes ,no"):
 async def ping(ctx):
     await ctx.send(f'Pong! {round(bot.latency *1000)}ms')
 
-@bot.command()
-async def gif(ctx,*,text):
-    await ctx.send("/giphy "+text)
+##@bot.command()
+##async def gif(ctx,*,text):
+##    await ctx.send("/giphy "+text)
+##    await ctx.send("/tenor "+text)
 
 @bot.command(aliases=["cjoke"])
 async def coding_joke(ctx):

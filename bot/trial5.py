@@ -100,7 +100,7 @@ async def pm(ctx , member: discord.Member = None,*,text):
 async def clear(ctx,amount=1):
     await ctx.channel.purge(limit=amount+1)
 
-hi=["https://media.tenor.com/images/89875b33e32cdd0d1777553653a6717c/tenor.gif",
+hi_urls=["https://media.tenor.com/images/89875b33e32cdd0d1777553653a6717c/tenor.gif",
     "https://media.tenor.com/images/852dab1b47145c779f3266a9ac76d922/tenor.gif",
     "https://media.tenor.com/images/18e364be2476610c0c760a631c63416e/tenor.gif",
     "https://media.tenor.com/images/fe3e2d08c49445ca807935eba60e5627/tenor.gif",
@@ -113,9 +113,9 @@ async def hello(ctx, member : discord.Member = None):
     if not member:
         member = ctx.author
     await ctx.send('Hello! '+member.mention)
-    await ctx.send(random.choice(hi))
+    await ctx.send(random.choice(hi_urls))
 
-uthere=["https://media.tenor.com/images/fa2e94e3d890184f667cf9d0a381a213/tenor.gif",
+uthere_urls=["https://media.tenor.com/images/fa2e94e3d890184f667cf9d0a381a213/tenor.gif",
         "https://media.tenor.com/images/e27c3c608e5502accd4853d343be876c/tenor.gif",
         "https://media.tenor.com/images/fae3cdddd0ca0a75b4fee69188d84e67/tenor.gif",
         "https://media.tenor.com/images/fb438267a923f041ab3b8d5ef2c2e2a4/tenor.gif",
@@ -127,9 +127,9 @@ async def areuthere(ctx, user : discord.Member = None):
     if not user:
         user=ctx.author
     await ctx.send('Are You There? '+user.mention)
-    await ctx.send(random.choice(uthere))
+    await ctx.send(random.choice(uthere_urls))
 
-insult=["https://media.tenor.com/images/19c50486ee6b472aba2817024c5ee4a5/tenor.gif",
+insult_urls=["https://media.tenor.com/images/19c50486ee6b472aba2817024c5ee4a5/tenor.gif",
         "https://media.tenor.com/images/2141dce8c8a73632749ede31cb6dd215/tenor.gif",
         "https://media.tenor.com/images/7397ff5d71c043634233a2be91053d8a/tenor.gif",
         "https://media.tenor.com/images/14cf6a44d0bd56f95eab06051c2c8bfd/tenor.gif",
@@ -142,9 +142,9 @@ async def insult(ctx, user : discord.Member =None):
     if not user:
         user=ctx.author
     await ctx.send('Insulting'+user.mention)
-    await ctx.send(random.choice(insult))
+    await ctx.send(random.choice(insult_urls))
 
-gm=["https://media.tenor.com/images/027da4b11ab91e5c0dffb388a8c6f060/tenor.gif",
+gm_urls=["https://media.tenor.com/images/027da4b11ab91e5c0dffb388a8c6f060/tenor.gif",
     "https://media.tenor.com/images/84a8c2f0a681c3fc7db9b7084122d5a1/tenor.gif",
     "https://media.tenor.com/images/c591a3e438a4249775bf00457b915793/tenor.gif",
     "https://media.tenor.com/images/2890b109fc92eff030d1c24db0d2a761/tenor.gif",
@@ -156,9 +156,9 @@ async def goodmorning(ctx, user : discord.Member =None):
     if not user:
         user=ctx.author
     await ctx.send('Good Morning! '+user.mention)
-    await ctx.send(random.choice(gm))
+    await ctx.send(random.choice(gm_urls))
 
-gn=["https://media.tenor.com/images/dec42b8d70a58a62cf106ecac1023d60/tenor.gif",
+gn_urls=["https://media.tenor.com/images/dec42b8d70a58a62cf106ecac1023d60/tenor.gif",
     "https://media.tenor.com/images/ccd68c7c41800fb7090eced436a1bda0/tenor.gif",
     "https://media.tenor.com/images/ef780440dce0fe33dedf9ca205f2ca1c/tenor.gif",
     "https://media.tenor.com/images/106064f0a356423af9e2ac51bef3409a/tenor.gif",
@@ -170,9 +170,9 @@ async def goodnight(ctx, user : discord.Member =None):
     if not user:
         user=ctx.author
     await ctx.send('Good Night! '+user.mention)
-    await ctx.send(random.choice(gn))
+    await ctx.send(random.choice(gn_urls))
 
-bye=["https://media.tenor.com/images/5becc8db5702cc2f9affea9559f10cd1/tenor.gif",
+bye_urls=["https://media.tenor.com/images/5becc8db5702cc2f9affea9559f10cd1/tenor.gif",
      "https://media.tenor.com/images/e955f55bab6839ec724531e3bae3303c/tenor.gif",
      "https://media.tenor.com/images/0f5b101d294b217d13b3badb43c38fa0/tenor.gif",
      "https://media.tenor.com/images/217be23d6af58e44d7e0fb48595815bd/tenor.gif",
@@ -188,7 +188,7 @@ async def bye(ctx, user : discord.Member =None):
     if not user:
         user=ctx.author
     await ctx.send('Bye! '+user.mention)
-    await ctx.send(random.choice(bye))
+    await ctx.send(random.choice(bye_urls))
 
 @bot.command()
 async def spam(ctx, times,*,text):
@@ -202,12 +202,7 @@ async def choice(ctx,options="yes ,no"):
 @bot.command()
 async def ping(ctx):
     await ctx.send(f'Pong! {round(bot.latency *1000)}ms')
-
-##@bot.command()
-##async def gif(ctx,*,text):
-##    await ctx.send("/giphy "+text)
-##    await ctx.send("/tenor "+text)
-
+    
 @bot.command(aliases=["cjoke"])
 async def coding_joke(ctx):
     await ctx.send(pyjokes.get_joke())

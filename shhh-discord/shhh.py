@@ -4,11 +4,14 @@ token = open("token.txt", "r").read()
 client = discord.Client()
 
 def check_profanity(text):
-	obj = requests.get('http://www.wdylike.appspot.com/?q=' + str(text))
-	if 'true' in obj.text:
-		return True
-	elif 'false' in obj.text:
-		return False
+        if text!="pass":
+                obj = requests.get('http://www.wdylike.appspot.com/?q=' + str(text))
+                if 'true' in obj.text:
+                        return True
+                elif 'false' in obj.text:
+                        return False
+        else:
+                return False
 
 def common_member(a):
         f=open(r"bannedwords.txt","r")
